@@ -1,0 +1,1 @@
+# fever_detection_client
