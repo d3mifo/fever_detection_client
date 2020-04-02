@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import AuthenticatedRoute from './components/AuthenticatedRoute';
+import UnauthenticatedRoute from './components/UnauthenticatedRoute';
+
 import Home from './components/Home';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
 
-export default function Routes() {
-    return (
-        <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/login" exact component={Login} />
-            <Route component={NotFound} />
-        </Switch>
-    )
-}
+export default ({ childProps }) =>
+    <Switch>
+        <AuthenticatedRoute path="/" exact component={Home} props={childProps} />
+        <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
+        <Route component={NotFound} />
+    </Switch>

@@ -9,7 +9,24 @@ import Routes from '../Routes';
 import '../styles/App.css';
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { isAuthenticated: false }
+    }
+
+    userHasAuthenticated = (bool) => {
+        this.setState({ isAuthenticated: bool })
+    }
+
+    handleLogout = () => {
+        this.userHasAuthenticated(false);
+    }
+
     render() {
+        const childProps = {
+            isAuthenticated: this.state.isAuthenticated,
+            userHasAuthenticated: this.userHasAuthenticated
+        }
         return (
             <div className="App container">
                 <Navbar sticky="top" collapseOnSelect expand="lg" bg="light" variant="light">
@@ -27,17 +44,21 @@ class App extends React.Component {
                                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
-                        <Nav>
-                            <LinkContainer to="/signup">
-                                <Nav.Link>Signup</Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/login">
-                                <Nav.Link>Login</Nav.Link>
-                            </LinkContainer>
-                        </Nav>
+                        {
+                            this.state.isAuthenticated
+                                ? <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
+                                : <Nav>
+                                    <LinkContainer to="/signup">
+                                        <Nav.Link>Signup</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="/login">
+                                        <Nav.Link>Login</Nav.Link>
+                                    </LinkContainer>
+                                </Nav>
+                        }
                     </Navbar.Collapse>
                 </Navbar>
-                <Routes />
+                <Routes childProps={childProps} />
             </div>
         );
     }

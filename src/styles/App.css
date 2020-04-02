@@ -5,3 +5,11 @@
 .App .navbar-brand {
     font-weight: bold;
 }
+
+.nav-link {
+    color: inherit;
+}
+
+.nav-link:hover {
+    color: inherit;
+}
