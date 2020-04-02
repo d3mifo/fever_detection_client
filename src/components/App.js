@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from '../images/logo.svg';
+import { Link } from 'react-router-dom';
+import { Container, Navbar } from 'react-bootstrap';
 import '../styles/App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    render() {
+        return (
+            // <div className="App container">
+            <Container>
+                <Navbar fixed="top" bg="light" expand="lg">
+                    <Navbar.Brand>
+                        <Link to="/">Dashboard</Link>
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse title="Dropdown"></Navbar.Collapse>
+                </Navbar>
+            {/* </div> */}
+            </Container>
+        );
+    }
 }
 
 export default App;
