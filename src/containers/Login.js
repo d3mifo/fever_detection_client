@@ -4,7 +4,7 @@ import { Auth } from 'aws-amplify'
 import { Link } from 'react-router-dom';
 
 import '../styles/Login.css'
-import LoadingButton from './LoadingButton';
+import LoadingButton from '../components/LoadingButton';
 
 export default class Login extends React.Component {
     constructor(props) {

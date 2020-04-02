@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify';
 import { Link } from 'react-router-dom';
 import { FaThumbsUp } from 'react-icons/fa';
 
-import LoadingButton from './LoadingButton';
+import LoadingButton from '../components/LoadingButton';
 import '../styles/ResetPassword.css';
 import { Form, Alert } from 'react-bootstrap';
 

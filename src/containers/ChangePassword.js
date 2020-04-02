@@ -1,7 +1,7 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
 
-import LoadingButton from './LoadingButton';
+import LoadingButton from '../components/LoadingButton';
 import '../styles/ChangePassword.css';
 import { Form, Alert } from 'react-bootstrap';
 

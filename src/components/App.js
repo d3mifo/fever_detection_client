@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 
 import { Auth } from 'aws-amplify';
 
@@ -54,15 +54,10 @@ class App extends React.Component {
                             {
                                 this.state.isAuthenticated
                                     ? <div className="container">
-                                    <Nav.Link href="#features">X</Nav.Link>
-                                    <Nav.Link href="#pricing">Y</Nav.Link>
-                                    <NavDropdown title="zDrop" id="collasible-nav-dropdown">
-                                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                                    </NavDropdown></div>
+                                        <LinkContainer to="/upload">
+                                            <Nav.Link>Upload</Nav.Link>
+                                        </LinkContainer>
+                                      </div>
                                     : null
                             }
                         </Nav>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import LoadingButton from './LoadingButton';
+import LoadingButton from '../components/LoadingButton';
 import '../styles/Settings.css';
 
 export default class Settings extends React.Component {
