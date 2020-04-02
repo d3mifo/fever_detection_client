@@ -86,6 +86,7 @@ export default class ChangeEmail extends React.Component {
     render() {
         return (
             <div className="ChangeEmail">
+                <h2>Change User Email</h2>
                 {
                     this.state.alertVisible
                         ? <Alert dismissible variant={this.state.alertLevel} onClose={() => this.setState({ alertVisible: false })}>

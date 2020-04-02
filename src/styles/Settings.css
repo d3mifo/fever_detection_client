@@ -8,3 +8,8 @@
   .Settings .LoaderButton:last-child {
     margin-top: 15px;
   }
+
+  .Settings h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}

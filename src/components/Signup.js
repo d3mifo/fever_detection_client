@@ -93,6 +93,7 @@ export default class Signup extends React.Component {
     render() {
         return (
             <div className="Signup">
+                <h2>Signup</h2>
                 {
                     this.state.alertVisible
                         ? <Alert dismissible variant={this.state.alertLevel} onClose={() => this.setState({ alertVisible: false })}>

@@ -42,6 +42,7 @@ export default class ChangePassword extends React.Component {
     render() {
         return (
             <div className="ChangePassword">
+                <h2>Change Password</h2>
                 {
                     this.state.alertVisible
                         ? <Alert dismissible variant={this.state.alertLevel} onClose={() => this.setState({ alertVisible: false })}>

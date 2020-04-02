@@ -13,6 +13,7 @@ export default class Settings extends React.Component {
     render() {
         return (
             <div className="Settings">
+                <h2>Settings</h2>
                 <LinkContainer to="/settings/email">
                     <LoadingButton block>Change Email</LoadingButton>
                 </LinkContainer>

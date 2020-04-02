@@ -42,6 +42,7 @@ export default class Login extends React.Component {
     render() {
         return (
             <div className="Login">
+                <h2>Login</h2>
                 {
                     this.state.alertVisible
                         ? <Alert dismissible variant={this.state.alertLevel} onClose={() => this.setState({ alertVisible: false })}>
