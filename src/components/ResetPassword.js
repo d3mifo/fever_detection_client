@@ -16,6 +16,7 @@ export default class ResetPassword extends React.Component {
             codeSent: false,
             confirmed: false,
             confirmPassword: "",
+            password: "",
             isConfirming: false,
             isSendingCode: false,
             alertVisible: false,

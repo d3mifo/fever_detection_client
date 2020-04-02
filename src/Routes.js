@@ -11,6 +11,7 @@ import Settings from './components/Settings'
 import NotFound from './components/NotFound';
 import ChangePassword from './components/ChangePassword';
 import ChangeEmail from './components/ChangeEmail';
+import Signup from './components/Signup';
 
 export default ({ childProps }) =>
     <Switch>
@@ -20,5 +21,6 @@ export default ({ childProps }) =>
         <AuthenticatedRoute path="/settings/email" exact component={ChangeEmail} props={childProps} />
         <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
         <UnauthenticatedRoute path="/login/reset" exact component={ResetPassword} props={childProps} />
+        <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} />
         <Route component={NotFound} />
     </Switch>

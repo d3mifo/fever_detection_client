@@ -21,7 +21,7 @@ class App extends React.Component {
             await Auth.currentSession();
             this.userHasAuthenticated(true);
         }
-        catch(e) {
+        catch (e) {
             if (e !== "No current user") alert(e);
         }
         this.userIsAuthenticating(false)
@@ -49,17 +49,24 @@ class App extends React.Component {
                     <Navbar.Brand><Link to="/">ThermEye</Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
+
                         <Nav className="mr-auto">
-                            <Nav.Link href="#features">X</Nav.Link>
-                            <Nav.Link href="#pricing">Y</Nav.Link>
-                            <NavDropdown title="zDrop" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>
+                            {
+                                this.state.isAuthenticated
+                                    ? <div className="container">
+                                    <Nav.Link href="#features">X</Nav.Link>
+                                    <Nav.Link href="#pricing">Y</Nav.Link>
+                                    <NavDropdown title="zDrop" id="collasible-nav-dropdown">
+                                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                                    </NavDropdown></div>
+                                    : null
+                            }
                         </Nav>
+
                         {
                             this.state.isAuthenticated
                                 ? <Fragment>
@@ -67,7 +74,7 @@ class App extends React.Component {
                                         <Nav.Link>Settings</Nav.Link>
                                     </LinkContainer>
                                     <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
-                                  </Fragment>
+                                </Fragment>
                                 : <Nav>
                                     <LinkContainer to="/signup">
                                         <Nav.Link>Signup</Nav.Link>
