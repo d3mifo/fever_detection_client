@@ -1,14 +1,25 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form, Alert } from 'react-bootstrap';
 import { Auth } from 'aws-amplify'
+import { Link } from 'react-router-dom';
 
 import '../styles/Login.css'
+import LoadingButton from './LoadingButton';
 
 export default class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { email: "", password: "" }
+        this.state = {
+            email: "",
+            password: "",
+            isLoading: false,
+            alertVisible: false,
+            alertLevel: "",
+            alertContent: ""
+        }
     }
+
+    alert = (e, level) => this.setState({ alertVisible: true, alertContent: e.message, alertLevel: level })
 
     validateForm = () => {
         return this.state.email.length > 0 && this.state.password.length > 0;
@@ -16,18 +27,28 @@ export default class Login extends React.Component {
 
     handleSubmit = async (event) => {
         event.preventDefault();
-
+        this.setState({ isLoading: true });
         try {
             await Auth.signIn(this.state.email, this.state.password);
             this.props.userHasAuthenticated(true);
-        } catch(e) {
-            alert(e.message)
+            this.props.history.push("/")
+        } catch (e) {
+            this.alert(e, "danger")
+        } finally {
+            this.setState({ isLoading: false })
         }
     }
 
     render() {
         return (
             <div className="Login">
+                {
+                    this.state.alertVisible
+                        ? <Alert dismissible variant={this.state.alertLevel} onClose={() => this.setState({ alertVisible: false })}>
+                            {this.state.alertContent}
+                        </Alert>
+                        : null
+                }
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="email">
                         <Form.Label>Email</Form.Label>
@@ -37,7 +58,8 @@ export default class Login extends React.Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
                     </Form.Group>
-                    <Button block size="large" disabled={!this.validateForm()} type="submit">Login</Button>
+                    <Link to="login/reset">Forgot Password</Link>
+                    <LoadingButton block size="large" type="submit" isLoading={this.state.isLoading} disabled={!this.validateForm()}>Login</LoadingButton>
                 </Form>
             </div>
         )

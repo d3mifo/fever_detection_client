@@ -1,0 +1,25 @@
+import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
+
+import LoadingButton from './LoadingButton';
+import '../styles/Settings.css';
+
+export default class Settings extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    render() {
+        return (
+            <div className="Settings">
+                <LinkContainer to="/settings/email">
+                    <LoadingButton block>Change Email</LoadingButton>
+                </LinkContainer>
+                <LinkContainer to="/settings/password">
+                    <LoadingButton block>Change Password</LoadingButton>
+                </LinkContainer>
+            </div>
+        )
+    }
+}

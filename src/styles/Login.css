@@ -8,3 +8,13 @@
         max-width: 320px;
     }
 }
+
+.Login .form-label {
+    font-weight: bold;
+}
+
+.Login form a {
+    margin-bottom: 15px;
+    display: block;
+    font-size: 14px;
+}  

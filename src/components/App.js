@@ -1,7 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+
+import { Auth } from 'aws-amplify';
 
 import Routes from '../Routes';
 
@@ -11,15 +13,28 @@ import '../styles/App.css';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isAuthenticated: false }
+        this.state = { isAuthenticated: false, isAuthenticating: true }
     }
 
-    userHasAuthenticated = (bool) => {
-        this.setState({ isAuthenticated: bool })
+    componentDidMount = async () => {
+        try {
+            await Auth.currentSession();
+            this.userHasAuthenticated(true);
+        }
+        catch(e) {
+            if (e !== "No current user") alert(e);
+        }
+        this.userIsAuthenticating(false)
     }
 
-    handleLogout = () => {
+    userHasAuthenticated = (bool) => this.setState({ isAuthenticated: bool })
+
+    userIsAuthenticating = (bool) => this.setState({ isAuthenticating: bool })
+
+    handleLogout = async () => {
+        await Auth.signOut();
         this.userHasAuthenticated(false);
+        this.props.history.push('/login')
     }
 
     render() {
@@ -28,9 +43,10 @@ class App extends React.Component {
             userHasAuthenticated: this.userHasAuthenticated
         }
         return (
+            !this.isAuthenticating &&
             <div className="App container">
                 <Navbar sticky="top" collapseOnSelect expand="lg" bg="light" variant="light">
-                    <Navbar.Brand><Link to="/">React-Bootstrap</Link></Navbar.Brand>
+                    <Navbar.Brand><Link to="/">ThermEye</Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
@@ -46,7 +62,12 @@ class App extends React.Component {
                         </Nav>
                         {
                             this.state.isAuthenticated
-                                ? <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
+                                ? <Fragment>
+                                    <LinkContainer to="/settings">
+                                        <Nav.Link>Settings</Nav.Link>
+                                    </LinkContainer>
+                                    <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
+                                  </Fragment>
                                 : <Nav>
                                     <LinkContainer to="/signup">
                                         <Nav.Link>Signup</Nav.Link>
@@ -64,4 +85,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default withRouter(App);
