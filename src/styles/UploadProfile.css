@@ -1,14 +1,28 @@
-.UploadProfile form {
-    padding-bottom: 15px;
-  }
-  
-  .UploadProfile form textarea {
-    height: 300px;
-    font-size: 24px;
+@media all and (min-width: 480px) {
+  .UploadProfile {
+    padding: 60px 0;
   }
 
-  .UploadProfile h2 {
+  .UploadProfile form {
+    margin: 0 auto;
+    max-width: 480px;
+    padding-bottom: 15px;
+  }
+}
+
+.UploadProfile h2 {
     text-align: center;
     margin-bottom: 25px;
 
+}
+
+.UploadProfile .upload-submit {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.UploadProfile .upload-progress {
+  height: 4px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
