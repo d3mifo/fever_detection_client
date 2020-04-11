@@ -4,20 +4,20 @@ import { Route, Switch } from 'react-router-dom';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import UnauthenticatedRoute from './components/UnauthenticatedRoute';
 
-import Home from './containers/Home';
-import Login from './containers/Login';
-import ResetPassword from './containers/ResetPassword';
-import Settings from './containers/Settings'
+import Dashboard from './containers/Dashboard';
+import Login from './containers/auth/Login';
+import ResetPassword from './containers/auth/ResetPassword';
+import Settings from './containers/settings/Settings'
 import NotFound from './components/NotFound';
-import ChangePassword from './containers/ChangePassword';
-import ChangeEmail from './containers/ChangeEmail';
-import Signup from './containers/Signup';
-import UploadProfile from './containers/UploadProfile';
-import Participants from './containers/Participants';
+import ChangePassword from './containers/settings/ChangePassword';
+import ChangeEmail from './containers/settings/ChangeEmail';
+import Signup from './containers/auth/Signup';
+import UploadProfile from './containers/participants/UploadProfile';
+import Participants from './containers/participants/Participants';
 
 export default ({ childProps }) =>
     <Switch>
-        <AuthenticatedRoute path="/" exact component={Home} props={childProps} />
+        <AuthenticatedRoute path="/" exact component={Dashboard} props={childProps} />
         <AuthenticatedRoute path="/settings" exact component={Settings} props={childProps} />
         <AuthenticatedRoute path="/settings/password" exact component={ChangePassword} props={childProps} />
         <AuthenticatedRoute path="/settings/email" exact component={ChangeEmail} props={childProps} />

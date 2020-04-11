@@ -3,8 +3,8 @@ import { Form, Alert } from 'react-bootstrap';
 import { Auth } from 'aws-amplify'
 import { Link } from 'react-router-dom';
 
-import '../styles/Login.css'
-import LoadingButton from '../components/LoadingButton';
+import '../../styles/Login.css'
+import LoadingButton from '../../components/LoadingButton';
 
 export default class Login extends React.Component {
     constructor(props) {

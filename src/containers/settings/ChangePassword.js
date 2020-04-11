@@ -1,8 +1,8 @@
 import React from 'react';
 import { Auth } from 'aws-amplify';
 
-import LoadingButton from '../components/LoadingButton';
-import '../styles/ChangePassword.css';
+import LoadingButton from '../../components/LoadingButton';
+import '../../styles/ChangePassword.css';
 import { Form, Alert } from 'react-bootstrap';
 
 export default class ChangePassword extends React.Component {

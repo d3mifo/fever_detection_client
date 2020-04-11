@@ -3,10 +3,10 @@ import { Form, Alert, ProgressBar } from 'react-bootstrap';
 import { API } from 'aws-amplify';
 import { v4 as uuidv4 } from 'uuid';
 
-import LoadingButton from '../components/LoadingButton';
-import config from '../config';
-import '../styles/UploadProfile.css'
-import { S3Upload } from '../libs/awsLib';
+import LoadingButton from '../../components/LoadingButton';
+import config from '../../config';
+import '../../styles/UploadProfile.css'
+import { S3Upload } from '../../libs/awsLib';
 
 const roles = ["STAFF", "STUDENT", "CONTRACTOR", "OTHER"];
 
