@@ -50,8 +50,6 @@ export default class ChangeEmail extends React.Component {
         }
         catch (e) {
             this.alert(e.message, "danger");
-        }
-        finally {
             this.setState({ isConfirming: false });
         }
     }

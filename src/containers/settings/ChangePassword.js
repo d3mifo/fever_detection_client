@@ -33,9 +33,6 @@ export default class ChangePassword extends React.Component {
         }
         catch (e) {
             this.alert(e.message, "danger");
-            console.log(e);
-        }
-        finally {
             this.setState({ isChanging: false });
         }
     }

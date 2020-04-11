@@ -33,8 +33,7 @@ export default class Login extends React.Component {
             this.props.userHasAuthenticated(true);
             this.props.history.push("/")
         } catch (e) {
-            this.alert(e, "danger")
-        } finally {
+            this.alert(e, "danger");
             this.setState({ isLoading: false })
         }
     }
