@@ -6,8 +6,6 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { Auth } from 'aws-amplify';
 
 import Routes from '../Routes';
-
-
 import '../styles/App.css';
 
 class App extends React.Component {
@@ -54,8 +52,8 @@ class App extends React.Component {
                             {
                                 this.state.isAuthenticated
                                     ? <div className="container">
-                                        <LinkContainer to="/upload">
-                                            <Nav.Link>Upload</Nav.Link>
+                                        <LinkContainer to="/participants">
+                                            <Nav.Link>Participants</Nav.Link>
                                         </LinkContainer>
                                       </div>
                                     : null

@@ -13,6 +13,7 @@ import ChangePassword from './containers/ChangePassword';
 import ChangeEmail from './containers/ChangeEmail';
 import Signup from './containers/Signup';
 import UploadProfile from './containers/UploadProfile';
+import Participants from './containers/Participants';
 
 export default ({ childProps }) =>
     <Switch>
@@ -20,7 +21,8 @@ export default ({ childProps }) =>
         <AuthenticatedRoute path="/settings" exact component={Settings} props={childProps} />
         <AuthenticatedRoute path="/settings/password" exact component={ChangePassword} props={childProps} />
         <AuthenticatedRoute path="/settings/email" exact component={ChangeEmail} props={childProps} />
-        <AuthenticatedRoute path="/upload" exact component={UploadProfile} props={childProps} />
+        <AuthenticatedRoute path="/participants" exact component={Participants} props={childProps} />
+        <AuthenticatedRoute path="/participants/new" exact component={UploadProfile} props={childProps} />
         <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
         <UnauthenticatedRoute path="/login/reset" exact component={ResetPassword} props={childProps} />
         <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} />
