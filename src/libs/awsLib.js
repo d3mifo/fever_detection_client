@@ -4,6 +4,7 @@ export const S3Upload = async (file, id, percentOut) => {
     // https://github.com/aws-amplify/amplify-js/issues/332
     const stored = await Storage.put(id, file, {
         contentType: file.type,
+        customPrefix: { public: '' },
         progressCallback(progress) {
             let x = 100 * progress.loaded / progress.total;
             percentOut(x);
