@@ -8,8 +8,6 @@ import config from '../../config';
 import '../../styles/UploadProfile.css'
 import { S3Upload } from '../../libs/awsLib';
 
-const roles = ["STAFF", "STUDENT", "CONTRACTOR", "OTHER"];
-
 export default class UploadProfile extends React.Component {
     constructor(props) {
         super(props);
@@ -27,6 +25,8 @@ export default class UploadProfile extends React.Component {
             alertLevel: "",
             alertContent: ""
         }
+
+        console.log(this.props)
     }
 
     alert = (e, level) => this.setState({ alertVisible: true, alertContent: e, alertLevel: level })
@@ -119,7 +119,7 @@ export default class UploadProfile extends React.Component {
                     <Form.Group controlId="pRole">
                         <Form.Label>Role</Form.Label>
                         <Form.Control value={this.state.content} as="select" onChange={this.handleChange}>
-                            {roles.map((role) => <option key={role}>{role}</option>)}
+                            {config.roles.map((role) => <option key={role}>{role}</option>)}
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="file">

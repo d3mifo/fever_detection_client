@@ -13,6 +13,7 @@ class Dashboard extends React.Component {
             <div className="Dashboard">
                 <div className="lander">
                     <h1>Dashboard</h1>
+
                 </div>
             </div>
 

@@ -1,0 +1,47 @@
+@media all and (min-width: 480px) {
+    .Display {
+        padding: 60px 0;
+    }
+    .Display form {
+        margin: 0 auto;
+        max-width: 480px;
+        padding-bottom: 15px;
+    }
+}
+
+.Display h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.Display .add {
+    justify-content: center;
+    border: none;
+}
+
+.Display .placeholder {
+    justify-content: center;
+    padding: 0 25px;
+    font-size: 10em;
+    display: flex;
+}
+
+.Display .placeholder .spinner-border {
+    border-width: 0.02em;
+}
+
+.Display .upload-submit {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .Display .upload-progress {
+    height: 4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+.Display .edit-icon {
+    font-size: large;
+    margin-left: 15px;
+}

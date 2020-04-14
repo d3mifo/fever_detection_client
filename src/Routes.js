@@ -12,8 +12,8 @@ import NotFound from './components/NotFound';
 import ChangePassword from './containers/settings/ChangePassword';
 import ChangeEmail from './containers/settings/ChangeEmail';
 import Signup from './containers/auth/Signup';
-import UploadProfile from './containers/participants/UploadProfile';
 import Participants from './containers/participants/Participants';
+import Display from './containers/participants/Display';
 
 export default ({ childProps }) =>
     <Switch>
@@ -22,7 +22,7 @@ export default ({ childProps }) =>
         <AuthenticatedRoute path="/settings/password" exact component={ChangePassword} props={childProps} />
         <AuthenticatedRoute path="/settings/email" exact component={ChangeEmail} props={childProps} />
         <AuthenticatedRoute path="/participants" exact component={Participants} props={childProps} />
-        <AuthenticatedRoute path="/participants/new" exact component={UploadProfile} props={childProps} />
+        <AuthenticatedRoute path="/participants/:id" exact component={Display} props={childProps} />
         <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
         <UnauthenticatedRoute path="/login/reset" exact component={ResetPassword} props={childProps} />
         <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} />

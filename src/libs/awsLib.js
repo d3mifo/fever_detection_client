@@ -1,6 +1,7 @@
 import { Storage } from "aws-amplify";
 
-export async function S3Upload(file, id, percentOut) {
+export const S3Upload = async (file, id, percentOut) => {
+    // https://github.com/aws-amplify/amplify-js/issues/332
     const stored = await Storage.put(id, file, {
         contentType: file.type,
         progressCallback(progress) {
@@ -9,4 +10,10 @@ export async function S3Upload(file, id, percentOut) {
         }
     })
     return stored.key;
+}
+
+export const S3Get = async (key) => {
+    const item = await Storage.get(key);
+    return item;
+    
 }

@@ -1,0 +1,43 @@
+.Participants .deck {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.Participants .card {
+    flex: 1 0 21%;
+    width: 120px;
+    max-width: 120px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.Participants .add {
+    justify-content: center;
+}
+
+.Participants .placeholder {
+    justify-content: center;
+    padding: 0 25px;
+    font-size: 10em;
+    display: flex;
+}
+
+.Participants .placeholder .spinner-border {
+    border-width: 0.02em;
+}
+
+.Participants .card-body {
+    padding: 0.4rem;
+}
+
+.Participants .card-body .name {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.Participants .card-img-top {
+    max-width: 120px;
+    max-height: 160px;
+}
