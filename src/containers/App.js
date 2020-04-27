@@ -23,6 +23,7 @@ class App extends React.Component {
             if (e !== "No current user") alert(e);
         }
         this.userIsAuthenticating(false)
+        this.props.history.push("/participants/upload")
     }
 
     userHasAuthenticated = (bool) => this.setState({ isAuthenticated: bool })

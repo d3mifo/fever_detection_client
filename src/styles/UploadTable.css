@@ -1,28 +1,27 @@
 @media all and (min-width: 480px) {
-  .UploadProfile {
+  .UploadTable {
     padding: 60px 0;
-  }
-
-  .UploadProfile form {
-    margin: 0 auto;
-    max-width: 480px;
-    padding-bottom: 15px;
   }
 }
 
-.UploadProfile h2 {
+.UploadTable h2 {
     text-align: center;
     margin-bottom: 25px;
 
 }
 
-.UploadProfile .upload-submit {
+.UploadTable .upload-submit {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  margin-top: 15px;
 }
 
-.UploadProfile .upload-progress {
+.UploadTable .upload-progress {
   height: 4px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.UploadTable .known {
+  background-color: #7ab869;
 }

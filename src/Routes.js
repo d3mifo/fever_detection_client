@@ -14,6 +14,7 @@ import ChangeEmail from './containers/settings/ChangeEmail';
 import Signup from './containers/auth/Signup';
 import Participants from './containers/participants/Participants';
 import Display from './containers/participants/Display';
+import UploadTable from './containers/participants/UploadTable';
 
 export default ({ childProps }) =>
     <Switch>
@@ -22,6 +23,7 @@ export default ({ childProps }) =>
         <AuthenticatedRoute path="/settings/password" exact component={ChangePassword} props={childProps} />
         <AuthenticatedRoute path="/settings/email" exact component={ChangeEmail} props={childProps} />
         <AuthenticatedRoute path="/participants" exact component={Participants} props={childProps} />
+        <AuthenticatedRoute path="/participants/upload" exact component={UploadTable} props={childProps} />
         <AuthenticatedRoute path="/participants/:id" exact component={Display} props={childProps} />
         <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} />
         <UnauthenticatedRoute path="/login/reset" exact component={ResetPassword} props={childProps} />
