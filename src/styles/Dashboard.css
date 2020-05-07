@@ -11,3 +11,115 @@
 .Dashboard .lander p {
     color: #999
 }
+
+.Dashboard .accordion {
+    margin-top: 25px;
+}
+
+.Dashboard .card {
+    border: none;
+}
+
+.Dashboard .acc-header {
+    display: flex;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: inherit;
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.Dashboard .acc-header .priority {
+    display: flex;
+    padding: 10px;
+    vertical-align: middle;
+    margin-left: 20px;
+    margin-righT: 20px;
+}
+
+.Dashboard .acc-header .priority button {
+    width: 95px;
+    height: 40px;
+    margin: auto;
+    pointer-events: none;
+}
+
+.Dashboard .acc-header .profile {
+    display: flex;
+    padding: 10px;
+    width: 140px;
+    height: 180px;
+    align-items: center;
+}
+
+.Dashboard .acc-header .profile img {
+    width: 120px;
+    height: 160px;
+}
+
+.Dashboard .acc-header .profile .icon {
+    width: 110px;
+    height: 150px;
+    opacity: 0.4;
+}
+
+.Dashboard .acc-header .data {
+    display: flex;
+    margin-left: 10px;
+    flex-direction: column;
+    text-align: left;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+
+.Dashboard .acc-header .data .title {
+    width: 130px;
+}
+
+.Dashboard .card .content {
+    background-color: #eee;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 14px;
+}
+
+.Dashboard .card .card-body {
+    padding: 10px;
+}
+
+.Dashboard .card .content .card-body {
+    padding: 2px;
+}
+
+.Dashboard .card .nested {
+    padding: 2px;
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Dashboard .card .nested .title {
+    font-weight: 600;
+}
+
+.Dashboard ol.name-value {
+    list-style: none;
+}
+
+.Dashboard ol.name-value li {
+    display: flex;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+ol.name-value li label {
+    display: table-cell;
+    width: 35%;
+}
+
+ol.name-value li span {
+    display: table-cell;
+    width: 65%;
+}

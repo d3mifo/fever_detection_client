@@ -1,6 +1,6 @@
 import React from 'react';
-import { Auth, API } from 'aws-amplify';
-import { Form, ProgressBar, Alert, Card, Spinner } from 'react-bootstrap';
+import { Auth, API, Storage } from 'aws-amplify';
+import { Form, ProgressBar, Alert, Card, Spinner, Image } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,6 +16,7 @@ class Display extends React.Component {
         this.state = {
             participant: {},
             picture: null,
+            pictures: [],
             fetched: false,
             isLoading: false,
             edit_toggle: false,
@@ -36,7 +37,11 @@ class Display extends React.Component {
         } else {
             const participant = await this.fetchProfile(this.props.match.params.id);
             display_title = `${participant.first_name} ${participant.last_name}`;
-            this.setState({ participant, purpose: "EDIT" }, () => console.log(this.state));
+            let pictures = [];
+            for (let key of participant.s3_keys) {
+                pictures.push({ Key: key, Url: await this.fetchPictureURL(`${participant.id}/${key}`) });
+            }
+            this.setState({ participant, pictures, purpose: "EDIT" });
         }
         this.setState({ fetched: true, display_title} );
     }
@@ -48,6 +53,7 @@ class Display extends React.Component {
     getToken = async () => (await Auth.currentSession()).getIdToken().getJwtToken();
     fetchProfile = async (id) => API.get("participants", `/participants/${id}`, { headers: { Authorization: `Bearer ${(await this.getToken())}` } });
     submitProfile = async (profile) => API.post("participants", "/participants", { body: profile, headers: { Authorization: `Bearer ${(await this.getToken())}` } });
+    fetchPictureURL = async (key) => Storage.get(key, { customPrefix: { public: '' }, headers: { Authorization: `Bearer ${(await this.getToken())}` } })
 
     handleChange = (event) => {
         const id = event.target.id;
@@ -61,7 +67,17 @@ class Display extends React.Component {
         }
     }
 
-    validateForm = () => { return true }
+    validateForm = () => {
+        return (
+            this.state.participant.hasOwnProperty("first_name") &&
+            this.state.participant.hasOwnProperty("last_name") &&
+            this.state.participant.hasOwnProperty("email") &&
+            this.state.participant.hasOwnProperty("telephone") &&
+            this.state.participant.hasOwnProperty("department") &&
+            this.state.participant.hasOwnProperty("role") &&
+            this.state.picture !== null
+        );
+    }
 
     handleSubmit = async (event) => {
         event.preventDefault();
@@ -100,13 +116,6 @@ class Display extends React.Component {
             this.setState({ isLoading: false, percent: 0 });
         }
     }
-
-    toBase64 = async (file) => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result.replace(/^data:.+;base64,/, ''));
-        reader.onerror = error => reject(error)
-    })
 
     renderProfile = () => {
         return (
@@ -152,6 +161,14 @@ class Display extends React.Component {
                     <Form.Group controlId="file">
                         <Form.Label>Profile Picture</Form.Label>
                         <Form.Control disabled={!this.state.edit_toggle} type="file" onChange={this.handleFileChange} />
+                    </Form.Group>
+                    <Form.Group>
+                        <div className="image-placeholder">
+                            {this.state.pictures.map((img, index) => {
+                                if (index === 0) return <Image className="profile-img" key={img.Key} src={img.Url}></Image>
+                                else return <Image className="profile-img-secondary" key={img.Key} src={img.Url}></Image>
+                            })}
+                        </div>
                     </Form.Group>
                     <LoadingButton className="upload-submit" block type="submit" isLoading={this.state.isLoading} disabled={!this.validateForm()}>Submit</LoadingButton>
                     <ProgressBar className="upload-progress" variant="success" animated now={this.state.percent} />

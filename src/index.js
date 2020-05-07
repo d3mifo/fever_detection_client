@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Amplify from 'aws-amplify';
+import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
 
 import './styles/index.css';
 import App from './containers/App';
@@ -25,12 +26,24 @@ Amplify.configure({
         endpoints: [
             {
                 name: "participants",
-                endpoint: config.apiGateway.URL,
-                region: config.apiGateway.REGION
+                endpoint: config.apiGateway.participants.URL,
+                region: config.apiGateway.participants.REGION
+            },
+            {
+                name: "results",
+                endpoint: config.apiGateway.results.URL,
+                region: config.apiGateway.results.REGION
             }
         ]
     }
 })
+
+Amplify.addPluggable(
+    new AWSIoTProvider({
+        aws_pubsub_region: config.iot.REGION,
+        aws_pubsub_endpoint: config.iot.ENDPOINT
+    })
+)
 
 ReactDOM.render(
     <Router>

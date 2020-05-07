@@ -45,3 +45,20 @@
     font-size: large;
     margin-left: 15px;
 }
+
+.Display .image-placeholder {
+    display: flex;
+}
+
+.Display .profile-img {
+    width: 120px;
+    height: 160px;
+    padding: 5px;
+}
+
+.Display .profile-img-secondary {
+    width: 60px;
+    height: 80px;
+    padding: 5px;
+    margin-top: auto;
+}

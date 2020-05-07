@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import UnauthenticatedRoute from './components/UnauthenticatedRoute';
 
-import Dashboard from './containers/Dashboard';
+import Dashboard from './containers/dashboard/Dashboard';
 import Login from './containers/auth/Login';
 import ResetPassword from './containers/auth/ResetPassword';
 import Settings from './containers/settings/Settings'

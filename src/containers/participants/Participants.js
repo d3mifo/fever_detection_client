@@ -26,23 +26,36 @@ class Participants extends React.Component {
         this.setState({ participants, isLoading: false });
     }
 
+    handleRemove = async (id) => {
+        let participants = this.state.participants;
+        const profile = participants.find((p) => p.id === id);
+        delete profile.picture
+        participants = participants.filter((p) => p.id !== id);
+        this.setState({ participants });
+        await this.deleteParticipant(profile);
+    }
+
     fetchPictureURL = async (key) => Storage.get(key, { customPrefix: { public: '' }, headers: { Authorization: `Bearer ${(await this.getToken())}` } })
 
     getToken = async () => (await Auth.currentSession()).getIdToken().getJwtToken();
     fetchParticipants = async () => API.get("participants", "/participants", { headers: { Authorization: `Bearer ${(await this.getToken())}` } });
+    deleteParticipant = async (profile) => API.del("participants", `/participants/${profile.id}`, { body: { ...profile }, headers: { Authorization: `Bearer ${(await this.getToken())}` } });
 
     renderCards() {
         return (
             this.state.participants.map((p) =>
-                <LinkContainer key={p.id} to={`/participants/${p.id}`}>
-                    <Card>
-                        <Card.Img variant="top" src={p.picture} />
-                        <Card.Body>
-                            <Card.Title className="name">{`${p.first_name} ${p.last_name}`}</Card.Title>
-                            <Card.Subtitle>{`${p.role}`}</Card.Subtitle>
-                        </Card.Body>
-                    </Card>
-                </LinkContainer>
+                <div key={p.id} className="profile-holder">
+                    <LinkContainer to={`/participants/${p.id}`}>
+                        <Card>
+                            <Card.Img variant="top" src={p.picture} />
+                            <Card.Body>
+                                <Card.Title className="name">{`${p.first_name} ${p.last_name}`}</Card.Title>
+                                <Card.Subtitle>{`${p.role}`}</Card.Subtitle>
+                            </Card.Body>
+                        </Card>
+                    </LinkContainer>
+                    <button className="delete" onClick={() => this.handleRemove(p.id)}><span>&#10008;</span></button>
+                </div>
             )
         )
     }

@@ -41,7 +41,7 @@ export default class UploadTable extends React.Component {
                 status: participants.some((p) => p.id === user.Username)
             })
         }
-        this.setState({ profiles, isFetching: false }, () => console.log(this.state));
+        this.setState({ profiles, isFetching: false });
     }
 
     getVal = (arr, name) => arr.find(obj => obj.Name === name).Value
@@ -52,6 +52,8 @@ export default class UploadTable extends React.Component {
     fetchUsers = async () => API.get("participants", "/users", { headers: { Authorization: `Bearer ${(await this.getToken())}` } });
     fetchParticipants = async () => API.get("participants", "/participants", { headers: { Authorization: `Bearer ${(await this.getToken())}` } });    
     submitProfile = async (profile) => API.post("participants", "/participants", { body: profile, headers: { Authorization: `Bearer ${(await this.getToken())}` } });
+
+    checkDisabled = () => this.state.profiles.filter((profile) => "picture" in profile).length === 0;
 
     handleChange = (event) => this.setState({ [event.target.id]: event.target.value });
     handleFileChange = (id, file) => {
@@ -80,15 +82,12 @@ export default class UploadTable extends React.Component {
         }
 
         try {
-            let count = 0;
             for (let profile of profiles) {
                 const key = uuidv4();
                 profile.s3_keys = [ key ];
                 await S3Upload(profile.picture, `${profile.id}/${key}`, this.setPercent)
                 delete profile.picture
                 await this.submitProfile(profile)
-                count++
-                this.setState({ percent: 100 * count / profiles.length })
             }
 
             this.props.history.push('/participants')
@@ -128,7 +127,7 @@ export default class UploadTable extends React.Component {
                     </tbody>
 
                 </Table>
-                <LoadingButton className="upload-submit" block type="submit" isLoading={this.state.isLoading} disabled={this.state.profiles.length === 0}>Submit</LoadingButton>
+                <LoadingButton className="upload-submit" block type="submit" isLoading={this.state.isLoading} disabled={this.checkDisabled()}>Submit</LoadingButton>
                 <ProgressBar className="upload-progress" variant="success" animated now={this.state.percent} />
             </Form>
         )

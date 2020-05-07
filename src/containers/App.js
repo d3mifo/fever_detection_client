@@ -18,12 +18,16 @@ class App extends React.Component {
         try {
             await Auth.currentSession();
             this.userHasAuthenticated(true);
+            // this.addListeners();
         }
         catch (e) {
             if (e !== "No current user") alert(e);
         }
         this.userIsAuthenticating(false)
-        this.props.history.push("/participants/upload")
+    }
+
+    addListeners = () => {
+        window.addEventListener('unload', (event) => localStorage.clear());
     }
 
     userHasAuthenticated = (bool) => this.setState({ isAuthenticated: bool })
