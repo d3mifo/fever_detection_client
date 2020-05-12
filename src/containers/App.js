@@ -69,14 +69,7 @@ class App extends React.Component {
                                     </LinkContainer>
                                     <Nav.Link onClick={this.handleLogout}>Logout</Nav.Link>
                                 </Fragment>
-                                : <Nav>
-                                    <LinkContainer to="/signup">
-                                        <Nav.Link>Signup</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="/login">
-                                        <Nav.Link>Login</Nav.Link>
-                                    </LinkContainer>
-                                </Nav>
+                                : null
                         }
                     </Navbar.Collapse>
                 </Navbar>
