@@ -26,12 +26,8 @@ class App extends React.Component {
         this.userIsAuthenticating(false)
     }
 
-    addListeners = () => {
-        window.addEventListener('unload', (event) => localStorage.clear());
-    }
-
+    addListeners = () => window.addEventListener('unload', (event) => localStorage.clear());
     userHasAuthenticated = (bool) => this.setState({ isAuthenticated: bool })
-
     userIsAuthenticating = (bool) => this.setState({ isAuthenticating: bool })
 
     handleLogout = async () => {
@@ -49,7 +45,7 @@ class App extends React.Component {
             !this.isAuthenticating &&
             <div className="App container">
                 <Navbar sticky="top" collapseOnSelect expand="lg" bg="light" variant="light">
-                    <Navbar.Brand><Link to="/">ThermEye</Link></Navbar.Brand>
+                    <Navbar.Brand><Link to="/">HeatSync</Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
 
