@@ -37,8 +37,8 @@ class Dashboard extends React.Component {
     alert = (e, level) => this.setState({ alertVisible: true, alertContent: e, alertLevel: level });
     sortArray = (arr) => {
         const sorted = arr.sort((a, b) => {
-            if (a.risk.latest.createdAt < b.risk.latest.createdAt) return 1
-            else if (a.risk.latest.createdAt > b.risk.latest.createdAt) return -1
+            if (a.latest.createdAt < b.latest.createdAt) return 1
+            else if (a.latest.createdAt > b.latest.createdAt) return -1
             else return 0
         })
         return sorted;
@@ -50,12 +50,17 @@ class Dashboard extends React.Component {
                 const key = `${message.participant.id}/${message.participant.s3_keys[0]}`;
                 const picture = await this.fetchPictureURL(key);
                 let response = await fetch(picture);
-                if (response.status === 200) message.participant.picture = picture
+                if (response.status === 200) {
+                    message.status = "VALID";
+                    message.participant.picture = picture;
+                }
                 else {
+                    message.status = "ANONYMOUS";
                     message.participant = {}
-                    message.participant.picture = userIcon
+                    message.participant.picture = userIcon;
                 }
             } else {
+                message.status = "ANONYMOUS"
                 message.participant = {}
                 message.participant.picture = userIcon;
             }
@@ -70,12 +75,9 @@ class Dashboard extends React.Component {
         let message = data.value.message;
         const mResults = await this.manageResults(results, message);
         this.setState({ results: this.sortArray(mResults) });
-            
     }
     handleIoTError = async (error) => this.alert(error.message, "danger");
     handleIoTClose = async () => console.log("done")
-
-    handleImageError = (event) => {}
 
     getToken = async () => (await Auth.currentSession()).getIdToken().getJwtToken();
     fetchPictureURL = async (key) => Storage.get(key, { customPrefix: { public: '' }, headers: { Authorization: `Bearer ${(await this.getToken())}` } })
@@ -113,13 +115,9 @@ class Dashboard extends React.Component {
                 <div className="priority">
                     <Button
                         variant={
-                            result.risk.level === "LOW" 
-                            ? "info" 
-                            : result.risk.level === "MEDIUM" 
-                            ? "warning" 
-                            : result.risk.level === "HIGH"
-                            ? "danger"
-                            : "dark"
+                            result.risk.level === "LOW" ? "info" :
+                            result.risk.level === "MEDIUM" ? "warning" :
+                            result.risk.level === "HIGH" ? "danger" : "dark"
                         }
                         disabled={true}
                     >
@@ -130,10 +128,10 @@ class Dashboard extends React.Component {
                     <img className={`profile-img ${classExtra}`} alt="profile" src={result.participant.picture} />
                 </div>
                 <div className="data">
-                    {this.renderDataDiv("Timestamp", new Date(result.risk.latest.createdAt * 1000).toGMTString())}
-                    {this.renderDataDiv("Temperature", result.risk.latest.temperature)}
+                    {this.renderDataDiv("Timestamp", new Date(result.latest.createdAt * 1000).toGMTString())}
+                    {this.renderDataDiv("Temperature", result.latest.temperature)}
                     {this.renderDataDiv("Participant", result.participant.id)}
-                    {this.renderDataDiv("Sensor", result.risk.latest.sensor_id)}
+                    {this.renderDataDiv("Sensor", result.latest.sensor_id)}
                 </div>
             </Accordion.Toggle>
         )
@@ -145,7 +143,7 @@ class Dashboard extends React.Component {
                 {this.state.results.map((result, index) => 
                     <Card key={index}>
                         {this.renderAccordionHeader(result, index)}
-                        {result.rekognition.status === "UNKNOWN" ? null :
+                        {result.status === "ANONYMOUS" ? null :
                             <Accordion.Collapse eventKey={index.toString()}>
                                 <Card.Body className="content">
                                     {this.renderListItem("Participant", [
