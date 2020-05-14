@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-heatsyncclient-dev-140259-authRole",
+            "UnauthRoleArn": "arn:aws:iam::243703139243:role/amplify-heatsyncclient-dev-140259-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::243703139243:role/amplify-heatsyncclient-dev-140259-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "amplify-heatsyncclient-dev-140259-deployment",
+            "UnauthRoleName": "amplify-heatsyncclient-dev-140259-unauthRole",
+            "StackName": "amplify-heatsyncclient-dev-140259",
+            "StackId": "arn:aws:cloudformation:eu-west-2:243703139243:stack/amplify-heatsyncclient-dev-140259/e9fcba10-9450-11ea-ac6a-0a3915ca55a4",
+            "AmplifyAppId": "dr59mwgdtkwls"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "dr59mwgdtkwls",
+                    "type": "manual"
+                }
+            }
+        }
+    }
+}
